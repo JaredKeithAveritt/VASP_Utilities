@@ -1,7 +1,11 @@
+#this code takes inputs of 
+#num_atoms = the number of atoms in your system 
+#cores_per_node =the number of cores per node for the partition you want to use
+
 import math
 
-num_atoms = #set the number of atoms here
-cores_per_node = # set the number of cores per node for the partition you want to use for the calculation
+num_atoms = # set the number of atoms here
+cores_per_node = # set the number of cores per node  here
 
 
 def calc_ncore(num_atoms,cores_per_node):
