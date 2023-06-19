@@ -4,18 +4,18 @@
 
 import math
 
-num_atoms = # set the number of atoms here
-cores_per_node = # set the number of cores per node  here
+num_atoms = 177
+cores_per_node = 40
 
 
 def calc_ncore(num_atoms,cores_per_node):
-  num_nodes = math.ceil(num_atoms / cores_per_node)
-  total_num_cores = num_nodes * cores_per_node
-  sqrt_total_num_cores = int(math.sqrt(total_num_cores))
-  # Check each integer starting from 2 up to sqrt_total_num_cores
-  for test_ncore in range(2, sqrt_total_num_cores+1):
-      if cores_per_node % test_ncore == 0 and test_ncore % 2 == 0:
-          ncore=test_ncore
+    num_nodes = math.ceil(num_atoms / cores_per_node)
+    total_num_cores = num_nodes * cores_per_node
+    sqrt_total_num_cores = int(math.sqrt(total_num_cores))
+    # Check each integer starting from 2 up to sqrt_total_num_cores
+    for test_ncore in range(2, sqrt_total_num_cores+1):
+        if cores_per_node % test_ncore == 0 and test_ncore % 2 == 0:
+            ncore=test_ncore
     return ncore, num_nodes,total_num_cores, cores_per_node
 
 ncore, num_nodes , total_num_cores, cores_per_node=calc_ncore(num_atoms,cores_per_node)
