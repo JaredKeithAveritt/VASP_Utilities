@@ -18,6 +18,6 @@ ncore, num_nodes , total_num_cores, cores_per_node=calc_ncore(num_atoms,cores_pe
 
 print('add this line to the INCAR file: ')
 print('NCORE = ', ncore)
-print('and for the .sh file set: )
-print('#SBATCH -N ', ncore)
-print('#SBATCH --ntasks-per-node= ', ncore)
+print('and for the .sh file set: ')
+print('#SBATCH -N ', num_nodes)
+print('#SBATCH --ntasks-per-node= ', cores_per_node)
