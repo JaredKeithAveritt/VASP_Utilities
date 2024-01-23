@@ -1,8 +1,7 @@
-Certainly! Here is the provided content in markdown format:
+# Band structure calculations using VASP and vaspkit
 
-```markdown
-## Step 1. Optimize Structures using INCAR
-
+## Step 1. Optimize Structures using VASP
+the following is the recomended 'INCAR' file directives
 ```fortran
 Global Parameters (SR) Standard Relaxation, geometry optimization
 ISTART =  1            (Read existing wavefunction, if there)
@@ -27,7 +26,7 @@ ADDGRID= .TRUE.        (Increase grid, helps GGA convergence)
 
 ## Step 2. Convert POSCAR to standardized primitive cell
 
-In the folder containing the POSCAR open vaspkit and select option 602
+In the folder containing the POSCAR open vaspkit and select option '602'
 Create a new folder and copy the PRIMCELL.vasp file into that folder as POSCAR using:
 ```bash
 cp ../PRIMCELL.vasp POSCAR
