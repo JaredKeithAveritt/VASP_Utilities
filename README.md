@@ -1,3 +1,5 @@
+https://www.materialscloud.org/learn/sections/VNL7RL/a-gentle-introduction-to-dft-calculations-april-2020
+
 # Band structure calculations using VASP and vaspkit
 
 ## Step 1. Optimize Structures using VASP
