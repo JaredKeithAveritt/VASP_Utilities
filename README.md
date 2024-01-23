@@ -73,7 +73,7 @@ Create `KPOINTS` File, for graphene/MoS2 that looks like
 Comment Line
 0
 Monkhorst-Pack
-5	5	5
+5	5	1
 0.0	0.0	0.0
 ```
 
@@ -124,6 +124,4 @@ Reciprocal
    0.0000000000   0.5000000000   0.0000000000     Y              
    0.0000000000   0.0000000000   0.0000000000     GAMMA    
 ```
-```
 
-If you have any more requests or if there's anything else I can help you with, feel free to let me know!
