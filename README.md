@@ -63,6 +63,11 @@ cp ../opt/PRIMCELL.vasp POSCAR
 
 copy `POTCAR` and `batch.sh` files from `opt` folder to `scf` folder
 
+```bash
+cp ../opt/POTCAR .
+cp ../opt/batch.sh .
+```
+
 Create `INCAR`
 ```fortran
 Global Parameters
@@ -125,6 +130,14 @@ Reciprocal
 NOTE: make sure that `PRECISION` and `ENCUT` are the same in the `INCAR` file
 Copy `CHGCAR` file from previous step to new folder called `dos`
 Copy `WAVECAR` file from `scf` folder to `dos` folder
+
+```bash
+cp ../scf/POTCAR .
+cp ../scf/batch.sh .
+cp ../scf/CHGCAR .
+cp ../scf/WAVECAR .
+```
+
 
 Create `INCAR`
 ```fortran
