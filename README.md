@@ -67,34 +67,35 @@ Create `INCAR`
 ```fortran
 Global Parameters
 NCORE  =  4
-ISTART =  1            (Read existing wavefunction, if there)
-ISPIN  =  1            (Non-Spin polarised DFT)
-LREAL  = .FALSE.       (Projection operators: automatic)
-ENCUT  =  500        (Cut-off energy for plane wave basis set, in eV)
-PREC   =  Accurate   (Precision level: Normal or Accurate, set Accurate when perform structure lattice relaxation calculation)
-LWAVE  = .TRUE.        (Write WAVECAR or not)
-LCHARG = .TRUE.        (Write CHGCAR or not)
-ADDGRID= .TRUE.        (Increase grid, helps GGA convergence)
-# LVTOT  = .TRUE.      (Write total electrostatic potential into LOCPOT or not)
-# LVHAR  = .TRUE.      (Write ionic + Hartree electrostatic potential into LOCPOT or not)
-# NELECT =             (No. of electrons: charged cells, be careful)
-# LPLANE = .TRUE.      (Real space distribution, supercells)
-# NWRITE = 2           (Medium-level output)
-# KPAR   = 2           (Divides k-grid into separate groups)
-# NGXF    = 300        (FFT grid mesh density for nice charge/potential plots)
-# NGYF    = 300        (FFT grid mesh density for nice charge/potential plots)
-# NGZF    = 300        (FFT grid mesh density for nice charge/potential plots)
+ISTART =  1            #(Read existing wavefunction, if there)
+ISPIN  =  1            #(Non-Spin polarised DFT)
+LREAL  = .FALSE.       #(Projection operators: automatic)
+ENCUT  =  500        #(Cut-off energy for plane wave basis set, in eV)
+PREC   =  Accurate   #(Precision level: Normal or Accurate, set Accurate when perform structure lattice relaxation calculation)
+LWAVE  = .TRUE.        #(Write WAVECAR or not)
+LCHARG = .TRUE.        #(Write CHGCAR or not)
+ADDGRID= .TRUE.        #(Increase grid, helps GGA convergence)
+# LVTOT  = .TRUE.      #(Write total electrostatic potential into LOCPOT or not)
+# LVHAR  = .TRUE.      #(Write ionic + Hartree electrostatic potential into LOCPOT or not)
+# NELECT =             #(No. of electrons: charged cells, be careful)
+# LPLANE = .TRUE.      #(Real space distribution, supercells)
+# NWRITE = 2           #(Medium-level output)
+# KPAR   = 2           #(Divides k-grid into separate groups)
+# NGXF    = 300        #(FFT grid mesh density for nice charge/potential plots)
+# NGYF    = 300        #(FFT grid mesh density for nice charge/potential plots)
+# NGZF    = 300        #(FFT grid mesh density for nice charge/potential plots)
  
 Static Calculation
-ISMEAR =  0            (gaussian smearing method)
-SIGMA  =  0.05         (please check the width of the smearing)
-LORBIT =  11           (PAW radii for projected DOS)
-NEDOS  =  2001         (DOSCAR points)
-NELM   =  60           (Max electronic SCF steps)
-EDIFF  =  1E-08        (SCF energy convergence, in eV)
+ISMEAR =  0            #(gaussian smearing method)
+SIGMA  =  0.05         #(please check the width of the smearing)
+LORBIT =  11           #(PAW radii for projected DOS)
+NEDOS  =  2001         #(DOSCAR points)
+NELM   =  60           #(Max electronic SCF steps)
+EDIFF  =  1E-08        #(SCF energy convergence, in eV)
 ```
 
 Create `KPATH.in` file  using VASPKIT option `302` and copy/save it as `KPOINTS` file, 
+
 ```bash
 cp KPATH.in KPOINTS
 ```
