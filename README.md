@@ -50,6 +50,8 @@ rm POSCAR
 ```
 you should have no `POSCAR` file, but instead two files: `POSCAR.opt` and `PRIMCELL.vasp`
 
+an additional file that is generated `SYMMETRY` 
+
 
 ## Step 3. Calculate CHGCAR file by performing a single-point self-consistent calculation
 
