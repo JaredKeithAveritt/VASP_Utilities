@@ -133,6 +133,7 @@ Copy `WAVECAR` file from `scf` folder to `dos` folder
 
 ```bash
 cp ../scf/POTCAR .
+cp ../scf/POSCAR .
 cp ../scf/batch.sh .
 cp ../scf/CHGCAR .
 cp ../scf/WAVECAR .
