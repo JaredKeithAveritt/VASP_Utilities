@@ -96,7 +96,7 @@ EDIFF  =  1E-08        (SCF energy convergence, in eV)
 
 Create `KPATH.in` file  using VASPKIT option `302` and copy/save it as `KPOINTS` file, 
 ```bash
-cp CONTCAR POSCAR
+cp KPATH.in KPOINTS
 ```
 it will look like this (this can be double checked and visualized in [Link: seeK-path](https://www.materialscloud.org/work/tools/seekpath):
 
