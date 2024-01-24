@@ -23,3 +23,11 @@ export OMP_NUM_THREADS=2
 export MKL_THREADING_LAYER=INTEL
 
 mpirun -np 2 vasp_std
+
+
+
+https://enccs.github.io/vasp-best-practices/compile/
+
+
+
+they try 
