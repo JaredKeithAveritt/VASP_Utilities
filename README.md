@@ -75,6 +75,7 @@ PREC   =  Accurate   #(Precision level: Normal or Accurate, set Accurate when pe
 LWAVE  = .TRUE.        #(Write WAVECAR or not)
 LCHARG = .TRUE.        #(Write CHGCAR or not)
 ADDGRID= .TRUE.        #(Increase grid, helps GGA convergence)
+IVDW = 12 
 # LVTOT  = .TRUE.      #(Write total electrostatic potential into LOCPOT or not)
 # LVHAR  = .TRUE.      #(Write ionic + Hartree electrostatic potential into LOCPOT or not)
 # NELECT =             #(No. of electrons: charged cells, be careful)
