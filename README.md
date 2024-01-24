@@ -58,7 +58,7 @@ an additional file that is generated `SYMMETRY`
 Create a new folder called `scf` and copy the `PRIMCELL.vasp` file into that folder as `POSCAR` using:
 
 ```bash
-cp ../PRIMCELL.vasp POSCAR
+cp ../opt/PRIMCELL.vasp POSCAR
 ```
 
 copy `POTCAR` and `batch.sh` files from `opt` folder to `scf` folder
