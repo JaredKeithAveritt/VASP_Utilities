@@ -123,8 +123,8 @@ Reciprocal
 ## Step 4. Calculate DOS
 
 NOTE: make sure that `PRECISION` and `ENCUT` are the same in the `INCAR` file
-Copy `CHGCAR` file from previous step to new folder called `DOS`
-Copy `WAVECAR` file from `scf` folder to `DOS` folder
+Copy `CHGCAR` file from previous step to new folder called `dos`
+Copy `WAVECAR` file from `scf` folder to `dos` folder
 
 Create `INCAR`
 ```fortran
@@ -141,4 +141,9 @@ Create `INCAR`
 ## Step 4. Generate DOS plots
 note: must not be done using terminus, use the default terminal and have -X11 forwarding turned on. 
 
+in `dos` folder, run vaspkit `211` to get the band structure. a `band.png` figure will result. Additional files including `` , `` , ``  are also generated.
 
+`BAND.dat` and `BAND_RECORMATTED.dat` can be used in ORIGIN.
+in `BAND_RECORMATTED.dat` , the first column is the length of the K-path in units of 1/Angstrom, the following columns are the energy of each bands.
+
+in `KLABELS`, contains the positions of high symmetry points on band structure figures
