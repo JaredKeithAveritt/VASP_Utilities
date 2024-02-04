@@ -18,7 +18,7 @@ Note: The specific range (from line 7 to line 307) and the number of columns in 
 
 ## In Python 
 
-To achieve the equivalent in matplotlib, you can use the following Python code. Assuming you've already loaded the DOSCAR data into `energy_values` and `total_dos`, you can use Matplotlib to create a line plot:
+To achieve the equivalent in matplotlib, you can use the following Python code. 
 
 ```python
 import numpy as np
