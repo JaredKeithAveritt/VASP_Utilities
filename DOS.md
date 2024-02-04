@@ -21,18 +21,35 @@ Note: The specific range (from line 7 to line 307) and the number of columns in 
 To achieve the equivalent in matplotlib, you can use the following Python code. Assuming you've already loaded the DOSCAR data into `energy_values` and `total_dos`, you can use Matplotlib to create a line plot:
 
 ```python
+import numpy as np
 import matplotlib.pyplot as plt
 
-# Assuming energy_values and total_dos are loaded from DOSCAR file
+# Function to read DOSCAR file and extract energy values and total DOS
+def read_doscar(file_path):
+    with open(file_path, 'r') as file:
+        # Skip the header lines
+        for _ in range(5):
+            next(file)
 
-# Select the range from -5 to 5 eV
-energy_range = (energy_values >= -5) & (energy_values <= 5)
-filtered_energy_values = energy_values[energy_range]
-filtered_total_dos = total_dos[energy_range]
+        # Read total DOS data
+        energy_values = []
+        total_dos = []
+        for line in file:
+            data = line.split()
+            energy_values.append(float(data[0]))
+            total_dos.append(float(data[1]))
+
+    return np.array(energy_values), np.array(total_dos)
+
+# Provide the path to your DOSCAR file
+doscar_path = 'path/to/DOSCAR'
+
+# Read energy values and total DOS from DOSCAR file
+energy_values, total_dos = read_doscar(doscar_path)
 
 # Plot the data
 plt.figure(figsize=(8, 6))
-plt.plot(filtered_energy_values, filtered_total_dos, label='Total DOS', color='blue')
+plt.plot(energy_values, total_dos, label='Total DOS', color='blue')
 plt.axhline(0, color='black', linestyle='--', linewidth=0.8)  # Horizontal line at y=0
 plt.xlabel('Energy (eV)')
 plt.ylabel('Density of States')
@@ -40,8 +57,6 @@ plt.title('Density of States (DOS)')
 plt.legend()
 plt.grid(True)
 plt.show()
+
 ```
 
-This code selects only the data points in the range from -5 to 5 eV and then plots them using Matplotlib's `plot` function. Adjust the `filtered_energy_values` and `filtered_total_dos` based on your actual data.
-
-Make sure to replace the assumed variables (`energy_values` and `total_dos`) with the actual variables you have in your code.
