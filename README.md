@@ -2,6 +2,10 @@ https://www.materialscloud.org/learn/sections/VNL7RL/a-gentle-introduction-to-df
 
 # Band structure calculations using VASP and vaspkit
 
+IMPORTANT: VALUES OF PREC, ACCURACY and ENCUT must be the same for SCF and DOS calculation!
+NOTE: do not need the same KPOINTS file (can actually increase number in DOS calculation step)
+
+
 ## Step 1. Optimize Structures using VASP
 
 create a folder named `opt`
@@ -9,14 +13,14 @@ create a folder named `opt`
 create an `INCAR` file
 ```fortran
 ### Relaxation 
- ENCUT = 500
+ # ENCUT = 500
  SIGMA = 0.010000
- PREC = Accurate
+ # PREC = Accurate
  IBRION = 2
  ISMEAR = 0
  NSW = 1000
- IVDW = 12                             
- LREAL = Auto
+ # IVDW = 12                             
+ # LREAL = Auto
  EDIFF = 1.0e-7
  EDIFFG = -0.01
 ```
