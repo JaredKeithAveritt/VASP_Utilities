@@ -127,7 +127,7 @@ EDIFF  =  1E-08        (SCF energy convergence, in eV)
 ```
 III. Run calculation
 
-### Band Structure / DOS
+### Bands, NSCF
 
 I. After the SCF calculation is completed, make a directory called dos using 'mkdir dos' and then change your active directory to that folder 'cd dos' and then copy in the CONTCAR as POSCAR 'cp ../CONTCAR POSCAR' and the POTCAR 'cp ../POTCAR .'
 
@@ -163,10 +163,126 @@ LREAL = .FALSE.
 ```
 V. Run calculation
 
+
+### Plotting Band Structure 
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+from scipy.ndimage import gaussian_filter1d
+
+
+# Read data from the file
+def read_pdos(file_path):
+    data = np.loadtxt(file_path, skiprows=1)  # Assuming the first row contains strings
+
+    # Extract labels from the comment line
+    with open(file_path, 'r') as file:
+        comment_line = file.readline().strip()
+
+    # Remove leading '#' and split the line into labels
+    labels = comment_line[1:].split()[1:]
+
+    # Extract data columns
+    energy_values = data[:, 0]  # First column as x-axis values
+    pdos_values = data[:, 1:]  # Data excluding the first column
+
+    return energy_values, pdos_values, labels
+
+
+def read_doscar(file_path):
+    total_dos=[]
+    with open(file_path, 'r') as file:
+        # Skip the first four header lines
+        for _ in range(5):
+            next(file)
+        
+        # Read the 5th line to get the desired value
+        fifth_line = next(file).split()
+        E_fermi_value = float(fifth_line[3])  # Extracting the fourth item
+        NEDOS_value = float(fifth_line[2])  # Extracting the 3rd item
+        # Initialize lists for energy values and total DOS
+        energy_values = []
+        total_dos = []
+
+                
+        # Initialize line counter
+        line_count = 0
+
+        # Read total DOS data from the remaining lines
+        for line in file:
+            # Increment line counter
+            line_count += 1
+
+            # Check if line count exceeds NEDOS_value
+            if line_count > NEDOS_value:
+                break
+
+            data = line.split()
+            # Ensure the line has enough elements to avoid index errors
+            if len(data) >= 2:
+                energy_values.append(float(data[0]))
+                total_dos.append(float(data[1]))
+                
+
+
+    # Convert lists to numpy arrays for further processing
+    energy_values_np = np.array(energy_values)
+    total_dos_np = np.array(total_dos)
+
+    energy_values_np -= E_fermi_value
+
+    return energy_values_np, total_dos_np
+
+
+# Function to smooth data using Gaussian filter
+def smooth_data(data, sigma=2):
+    return gaussian_filter1d(data, sigma)
+
+doscar_path_M = '/nas/longleaf/home/............/scf/dos/DOSCAR'
+energy_values_M, total_dos_M = read_doscar(doscar_path_M)
+
+
+#pdos_path_GD = '/nas/longleaf/home/jarkeith/dissertation/........./D_PDOS.dat'
+#energy_values_GDA_pdos, total_pdos_GDA, labels = read_pdos(pdos_path_GDA)
+i=9
+
+
+
+sigma = 0  # Adjust the sigma value as needed
+
+# Smooth total DOS data using Gaussian filter
+if sigma !=0:
+    total_dos_M = smooth_data(total_dos_M, sigma)
+    
+# Plot the data
+plt.figure(figsize=(12, 10))
+
+plt.plot(energy_values_M, total_dos_M, label='M DOS', color='blue')
+
+plt.axhline(0, color='black', linestyle='--', linewidth=0.8)  # Horizontal line at y=0
+plt.xlabel('Energy (eV)')
+plt.ylabel('Density of States')
+if sigma !=0:
+    plt.title(f'Density of States (DOS), Gaussian Smoothing - Sigma = {sigma}')
+else: 
+    plt.title(f'Density of States (DOS)')
+plt.xlim(-5, 5)
+#plt.ylim(0, 1)
+plt.legend()
+plt.grid(True)
+#plt.scatter([-1.35], [14], marker='o', color='red', s=200, label='Point of Interest')
+#plt.scatter([3.98], [4], marker='*', color='red', s=200, label='Point of Interest')
+#plt.scatter([.7], [18], marker='*', color='green', s=200, label='Point of Interest')
+#plt.scatter([-.8], [18], marker='o', color='green', s=100, label='Point of Interest')
+
+plt.show()
+```
+
 ### Ploting DOS
 
-I. Run vaspkit 
-
+I. Run vaspkit `211` to create files and set Fermi Energy to zero eV in all the files (EXCEPT FOR DOSCAR!)
 
 ```
 import matplotlib.pyplot as plt
