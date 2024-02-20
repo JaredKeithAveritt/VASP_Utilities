@@ -1,0 +1,63 @@
+`NCORE` and `KPAR` are both parameters used in VASP to control different aspects of parallelization, and they can significantly affect the performance of your calculations. Understanding the difference between these two can help you optimize your computational jobs more effectively:
+
+### NCORE:
+
+- **Purpose**: `NCORE` controls the parallelization over bands in VASP. It essentially divides the workload of each k-point among a certain number of cores. If you have many bands (which is common in larger or more complex systems), increasing `NCORE` allows you to spread this workload over more CPU cores.
+  
+- **Usage**: When you increase `NCORE`, each k-point is handled by more cores, which can speed up the calculation if the bottleneck is the electronic (band) part of the calculation. However, increasing `NCORE` too much can lead to inefficiency due to increased communication overhead among cores.
+
+- **Optimal Setting**: Depends on the number of available cores, the total number of bands, and the efficiency of inter-core communication. Typically, `NCORE` is set so that the product of `NCORE` and the number of k-points does not exceed the total number of available cores.
+
+### KPAR:
+
+- **Purpose**: `KPAR` controls the parallelization over k-points themselves. It determines how many groups of k-points are calculated simultaneously in separate MPI processes. This is a higher level of parallelization compared to `NCORE` and can be particularly effective for systems with a large number of k-points.
+
+- **Usage**: Increasing `KPAR` allows different k-points to be processed in parallel, which can significantly reduce the total computation time for calculations where the number of k-points is a limiting factor. However, like `NCORE`, there is a point beyond which increasing `KPAR` does not yield further benefits and can even slow down the calculation due to the overhead associated with managing more parallel processes.
+
+- **Optimal Setting**: Depends mainly on the total number of k-points and the number of available cores. Ideally, `KPAR` is chosen such that it divides the total number of k-points and matches the layout of your computing resources (e.g., number of compute nodes).
+
+### Difference and How to Choose:
+
+- **Different Levels of Parallelism**: `NCORE` is about parallelism within each k-point (e.g., across bands), while `KPAR` is about parallelism across different k-points.
+  
+- **Complementary Use**: In many cases, `KPAR` and `NCORE` can be used together to optimize performance. For example, if you have a large number of cores available, you might set `KPAR` to handle multiple k-points at once, and within each group of k-points, use `NCORE` to speed up the processing of each individual k-point.
+
+- **Resource Matching**: Ideally, choose `KPAR` and `NCORE` such that `KPAR * number of k-points ≤ total number of cores` and `NCORE * number of k-points per group ≤ cores per node`. The exact values can depend on your system's specifics and might require some experimentation for optimal performance.
+
+In practice, the best values for `NCORE` and `KPAR` depend on your computational resources (like the number of available cores and how they're distributed across nodes) and the specifics of the VASP job (like the number of k-points and bands). It's often worth conducting test runs with different settings to find the most efficient configuration for your particular case.
+
+---
+
+The optimal value for `NCORE` in VASP depends on several factors, including the total number of CPU cores available to you and how your computational resources are organized (e.g., how many cores per node). The `NCORE` parameter in VASP determines how many cores are assigned to each individual k-point during the parallel calculation.
+
+A common strategy is to divide your total number of cores by the number of k-points to find a starting value for `NCORE`. However, the actual optimal value can vary based on the specifics of your computational setup and the characteristics of your calculation.
+
+To find the number of K-points, just run a test calculation and cancel it after a few minutes and run the script in terminal:
+  ```
+  grep "NKPTS =" OUTCAR
+  ```
+
+Here are general steps to determine an appropriate `NCORE` value:
+
+1. **Determine the total number of cores available**: For example, if you are using a cluster or a multi-core machine, identify the total number of cores that you can use for the calculation.
+
+2. **Divide the total number of cores by the number of k-points**: If 41 k-points, you would perform this calculation based on the total cores available. For instance, if you have 88 cores available:
+
+   ```
+   Total Cores / Number of K-points = NCORE
+   88 / 41 = 2
+   ```
+
+   Thus, `NCORE` could be set to 2 in this scenario.
+
+However, there are additional considerations:
+
+- **Efficiency**: The efficiency of parallelization can decrease if `NCORE` is set too high. This is because the overhead of communication between cores can outweigh the benefits of parallelization, especially if the workload per core is too low.
+
+- **Hardware Configuration**: Ideally, `NCORE` should be chosen such that each compute node is fully utilized. For example, if each node in your cluster has 24 cores, and you are using all cores on a node, you might want to align `NCORE` with factors of this number. However, this must also be balanced with the number of k-points.
+
+- **Trial and Error**: Sometimes the best way to determine the optimal `NCORE` is through experimentation. Start with the calculated value based on the total cores and k-points, then try slightly higher or lower values to see if there is a significant impact on performance.
+
+Remember, the `NCORE` setting is only applicable for parallel calculations.
+
+In practice, you should also ensure that `NCORE` is chosen such that `NCORE` times the number of k-points does not exceed the total number of cores you have available. Additionally, if using `KPAR` (which divides the k-point set among different groups for parallel processing), you'll need to ensure that `KPAR * NCORE` does not exceed your total core count and that `NCORE` is set appropriately for the workload distribution.
