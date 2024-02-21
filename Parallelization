@@ -1,4 +1,7 @@
-https://dannyvanpoucke.be/tag/vasp/
+https://dannyvanpoucke.be/tag/vasp/ <-- great explaination of each parameters
+
+
+https://github.com/JMSkelton/VASP-GPU-Benchmarking/tree/master/Scripts <--- scripts for performing benchmarks
 
 `NCORE` and `KPAR` are both parameters used in VASP to control different aspects of parallelization, and they can significantly affect the performance of your calculations. Understanding the difference between these two can help you optimize your computational jobs more effectively:
 
