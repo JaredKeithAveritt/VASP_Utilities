@@ -1,3 +1,5 @@
+https://dannyvanpoucke.be/tag/vasp/
+
 `NCORE` and `KPAR` are both parameters used in VASP to control different aspects of parallelization, and they can significantly affect the performance of your calculations. Understanding the difference between these two can help you optimize your computational jobs more effectively:
 
 ### NCORE:
