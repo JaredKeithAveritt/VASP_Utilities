@@ -1,3 +1,6 @@
+Noticing that ismear = -5 for graphene DOS is better than ismear=0 
+Noticing that ismear =0 or -5 does not matter for BS for graphene.
+
 https://www.materialscloud.org/learn/sections/VNL7RL/a-gentle-introduction-to-dft-calculations-april-2020
 
 # Band structure calculations using VASP and vaspkit
